@@ -15,5 +15,8 @@
     "koa-bodyparser": "^4.3.0",
     "mysql2": "^2.2.5",
     "sequelize": "^6.6.5"
+  },
+  "devDependencies": {
+    "jsonwebtoken": "^8.5.1"
   }
 }
