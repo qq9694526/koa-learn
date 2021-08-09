@@ -1,0 +1,19 @@
+{
+  "name": "island-koa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zhaohp",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/router": "^10.0.0",
+    "axios": "^0.21.1",
+    "koa": "^2.13.1",
+    "koa-bodyparser": "^4.3.0",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.5"
+  }
+}
