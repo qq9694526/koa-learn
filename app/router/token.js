@@ -1,13 +1,20 @@
-const jwt = require('jsonwebtoken')
-const Router = require('@koa/router');
+const jwt = require("jsonwebtoken");
+const Router = require("@koa/router");
 const router = new Router();
 
-const { APPID, SECRET } = require('../../config/index').miniapp
+const { privateKey, expiresIn } = require("../../config/index").token;
+const User = require("../models/user");
 
-router.post('/token/get', async (ctx, next) => {
-  // 生成token
-  // var token = jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256'});
-  ctx.body = "success"
+
+// 生成token
+router.post("/token/get", async (ctx, next) => {
+  const { openid } = ctx.request.body;
+  var token = jwt.sign({ openid }, privateKey, { expiresIn });
+  ctx.body = {
+    token,
+  };
 });
 
-module.exports = router
+// 验证token
+
+module.exports = router;

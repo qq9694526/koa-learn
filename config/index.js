@@ -5,6 +5,6 @@ module.exports = {
   },
   token:{
     privateKey:'b28bc1f0-1aba-406d-b51e-ade8ccba365d', // 秘钥，自己生成
-    expiresIn:24*60*60*1000 // 过期时间
+    expiresIn: 60*60 // 过期时间
   }
 }
