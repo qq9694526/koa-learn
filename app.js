@@ -1,22 +1,20 @@
-const Koa = require('koa');
-const bodyParser = require('koa-bodyparser');
+const Koa = require("koa");
+const Router = require("@koa/router");
+const requireDirectory = require("require-directory");
+const bodyParser = require("koa-bodyparser");
 
 const app = new Koa();
 
+// 解决ctx.request.body获取不到body内容的问题
+app.use(bodyParser());
 
-const classic = require('./app/router/class.js')
-const user = require('./app/router/user.js')
-const token = require('./app/router/token.js')
-
-// require('./app/modules/user')
-
-app
-  .use(bodyParser())
-  .use(classic.routes())
-  .use(user.routes())
-  .use(token.routes())
-
-
-app.use(classic.allowedMethods())
+// 路由自动注册
+requireDirectory(module, "./app/router", {
+  visit: (obj) => {
+    if (obj instanceof Router) {
+      app.use(obj.routes());
+    }
+  },
+});
 
 app.listen(3000);
