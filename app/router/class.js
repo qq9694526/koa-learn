@@ -1,9 +1,12 @@
-const Router = require('@koa/router');
+const Router = require("@koa/router");
 const router = new Router();
 
-router.get('/class/list', (ctx, next) => {
-  // ctx.router available
-  ctx.body = `请求：${ctx.method} ${ctx.path}`;
+router.get("/class/list", (ctx, next) => {
+  const { pageNum, pageSize } = ctx.query;
+  if (!pageNum || !pageSize) {
+    global.$res.paramsError("参数错误");
+  }
+  global.$res.success(ctx, { pageNum, pageSize });
 });
 
-module.exports = router
+module.exports = router;

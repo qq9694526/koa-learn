@@ -1,12 +1,15 @@
 const Koa = require("koa");
 const Router = require("@koa/router");
 const requireDirectory = require("require-directory");
-const bodyParser = require("koa-bodyparser");
+const bodyParser = require("koa-bodyparser"); // 解决ctx.request.body获取不到body内容的问题
+
+const catchError = require("./app/middlewares/catch-error"); // 全局异常处理
+const config = require("./config/index")
+const body = require("./app/utils/http-body");
 
 const app = new Koa();
 
-// 解决ctx.request.body获取不到body内容的问题
-app.use(bodyParser());
+app.use(bodyParser()).use(catchError);
 
 // 路由自动注册
 requireDirectory(module, "./app/router", {
@@ -16,5 +19,9 @@ requireDirectory(module, "./app/router", {
     }
   },
 });
+
+// 全局变量
+global.$res = body;
+global.$config = config
 
 app.listen(3000);

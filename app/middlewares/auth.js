@@ -9,11 +9,8 @@ class Auth {
       const { name: token } = basicAuth(ctx.req) || {};
       // 校验非空
       if (!token) {
-        ctx.body = {
-          code: 403,
-          msg: "token不能为空",
-        };
-        return 
+        global.$res.authError("token不能为空");
+        return;
       }
       try {
         const result = jwt.verify(token, privateKey) || {};
@@ -24,15 +21,9 @@ class Auth {
       } catch (error) {
         console.log("error::", error);
         if (error.name === "TokenExpiredError") {
-          ctx.body = {
-            code: 403,
-            msg: "token已过期",
-          };
+          global.$res.authError("token已过期");
         } else {
-          ctx.body = {
-            code: 403,
-            msg: "token不合法",
-          };
+          global.$res.authError("token不合法");
         }
       }
     };
