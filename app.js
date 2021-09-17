@@ -10,6 +10,8 @@ const body = require("./app/utils/http-body");
 const app = new Koa();
 
 app.use(bodyParser()).use(catchError);
+//静态资源
+app.use(require('koa-static')(__dirname + '/static'));
 
 // 路由自动注册
 requireDirectory(module, "./app/router", {
