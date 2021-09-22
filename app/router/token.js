@@ -3,9 +3,9 @@ const Router = require("@koa/router");
 const router = new Router();
 
 const { privateKey, expiresIn } = require("../../config/index").token;
-const User = require("../models/user");
+const User = require("../model/user");
 
-const Auth = require("../middlewares/auth");
+const Auth = require("../middleware/auth");
 
 // 生成token
 router.post("/token/get", async (ctx, next) => {

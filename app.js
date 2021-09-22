@@ -3,7 +3,7 @@ const Router = require("@koa/router");
 const requireDirectory = require("require-directory");
 const bodyParser = require("koa-bodyparser"); // 解决ctx.request.body获取不到body内容的问题
 
-const catchError = require("./app/middlewares/catch-error"); // 全局异常处理
+const catchError = require("./app/middleware/catch-error"); // 全局异常处理
 const config = require("./config/index")
 const body = require("./app/utils/http-body");
 

@@ -3,7 +3,7 @@ const router = new Router();
 const axios = require("axios");
 
 const { APPID, SECRET } = require("../../config/index").miniapp;
-const User = require("../models/user");
+const User = require("../model/user");
 
 router.post("/user/reg", async (ctx, next) => {
   const { code: JSCODE } = ctx.request.body;
