@@ -1,23 +1,27 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('./db')
 
-class User extends Model {}
+class Consultant extends Model {}
 
-// 用户
-User.init({
+// 销售顾问
+Consultant.init({
   // 在这里定义模型属性
-  nickname: {
+  name: {
     type: DataTypes.STRING,
   },
-  openid: {
+  avatar: {
     type: DataTypes.STRING,
-    unique: true
   },
-
+  phone: {
+    type: DataTypes.STRING,
+  },
+  tag:{
+    type: DataTypes.STRING,
+  }
 }, {
   // 这是其他模型参数
   sequelize, // 我们需要传递连接实例
-  modelName: 'User' // 我们需要选择模型名称
+  modelName: 'Consultant' // 我们需要选择模型名称
 });
 
-module.exports = User
+module.exports = Consultant
