@@ -7,16 +7,16 @@ class Consultant extends Model {}
 Consultant.init({
   // 在这里定义模型属性
   name: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(40),
   },
   avatar: {
     type: DataTypes.STRING,
   },
   phone: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(20),
   },
   tag:{
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(80),
   }
 }, {
   // 这是其他模型参数
