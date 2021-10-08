@@ -5,7 +5,7 @@ const bodyParser = require("koa-bodyparser"); // 解决ctx.request.body获取不
 
 const catchError = require("./app/middleware/catch-error"); // 全局异常处理
 const config = require("./config/index")
-const body = require("./app/utils/http-body");
+const httpResponse = require("./app/utils/http-response");
 
 const app = new Koa();
 
@@ -23,7 +23,7 @@ requireDirectory(module, "./app/router", {
 });
 
 // 全局变量
-global.$res = body;
+global.$res = httpResponse;
 global.$config = config
 
 app.listen(3000);

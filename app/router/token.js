@@ -11,12 +11,12 @@ const Auth = require("../middleware/auth");
 router.post("/token/get", async (ctx, next) => {
   const { openid } = ctx.request.body;
   var token = jwt.sign({ openid }, privateKey, { expiresIn });
-  global.$res.success(ctx, token);
+  global.$res.success(token);
 });
 
 // 验证token
 router.post("/token/auth", new Auth().m, async (ctx, next) => {
-  global.$res.success(ctx, {
+  global.$res.success({
     openid: ctx.auth.openid,
   });
 });

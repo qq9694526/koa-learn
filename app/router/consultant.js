@@ -34,12 +34,12 @@ router.post("/consultant/add", async (ctx, next) => {
     format: "flat",
   });
   if (error) {
-    global.$res.paramsError(error);
+    global.$res.error("params", error[0]);
   }
 
   const result = await Consultant.create({ name, avatar, phone, tag });
   if (result) {
-    global.$res.success(ctx);
+    global.$res.success();
   }
 });
 
@@ -47,7 +47,7 @@ router.post("/consultant/update", async (ctx, next) => {
   const { id, name, avatar, phone, tag } = ctx.request.body;
   //参数校验
   if (validate.isEmpty(id)) {
-    global.$res.paramsError("id不能为空");
+    global.$res.error("params", "id不能为空");
   }
   const constraints = {
     name: {
@@ -68,7 +68,7 @@ router.post("/consultant/update", async (ctx, next) => {
     format: "flat",
   });
   if (error) {
-    global.$res.paramsError(error);
+    global.$res.error("params", error[0]);
   }
 
   const result = await Consultant.update(
@@ -80,21 +80,21 @@ router.post("/consultant/update", async (ctx, next) => {
     }
   );
   if (result) {
-    global.$res.success(ctx);
+    global.$res.success();
   }
 });
 
 router.get("/consultant/list", async (ctx, next) => {
   const result = await Consultant.findAll();
   if (result) {
-    global.$res.success(ctx, result);
+    global.$res.success(result);
   }
 });
 
 router.post("/consultant/delete", async (ctx, next) => {
   const { id } = ctx.request.body;
   if (validate.isEmpty(id)) {
-    global.$res.paramsError("id不能为空");
+    global.$res.error("params", "id不能为空");
   }
 
   const result = await Consultant.destroy({
@@ -103,9 +103,9 @@ router.post("/consultant/delete", async (ctx, next) => {
     },
   });
   if (result) {
-    global.$res.success(ctx);
+    global.$res.success();
   } else {
-    global.$res.paramsError("记录不存在");
+    global.$res.error("params", "记录不存在");
   }
 });
 

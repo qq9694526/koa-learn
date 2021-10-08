@@ -12,7 +12,7 @@ router.post("/user/reg", async (ctx, next) => {
     `https://api.weixin.qq.com/sns/jscode2session?appid=${APPID}&secret=${SECRET}&js_code=${JSCODE}&grant_type=authorization_code`
   );
   if (!data.openid) {
-    global.$res.success(ctx, userinfo.data);
+    global.$res.success(userinfo.data);
     return;
   }
   // 判断用户是否已存在
@@ -23,13 +23,13 @@ router.post("/user/reg", async (ctx, next) => {
   });
   console.log(user);
   if (user) {
-    global.$res.success(ctx, user);
+    global.$res.success(user);
   } else {
     // 创建用户
     const user = await User.create({
       openid: data.openid,
     });
-    global.$res.success(ctx, user);
+    global.$res.success(user);
   }
 });
 

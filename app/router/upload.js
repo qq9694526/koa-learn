@@ -34,7 +34,7 @@ const upload = multer({
 router.post("/upload-single-file", upload.single('file'), (ctx) => {
   console.log("ctx.request.file", ctx.request.file);
   console.log("ctx.file", ctx.file);
-  global.$res.success(ctx, {
+  global.$res.success({
     filename: ctx.file.filename,//返回文件名
     path:ctx.file.path,
   });

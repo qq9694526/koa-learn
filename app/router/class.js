@@ -4,9 +4,9 @@ const router = new Router();
 router.get("/class/list", (ctx, next) => {
   const { pageNum, pageSize } = ctx.query;
   if (!pageNum || !pageSize) {
-    global.$res.paramsError("参数错误");
+    global.$res.error("params", "参数错误");
   }
-  global.$res.success(ctx, { pageNum, pageSize });
+  global.$res.success({ pageNum, pageSize });
 });
 
 module.exports = router;

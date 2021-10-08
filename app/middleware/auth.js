@@ -9,7 +9,7 @@ class Auth {
       const { name: token } = basicAuth(ctx.req) || {};
       // 校验非空
       if (!token) {
-        global.$res.authError("token不能为空");
+        global.$res.error("auth", "token不能为空");
         return;
       }
       try {
@@ -21,9 +21,9 @@ class Auth {
       } catch (error) {
         console.log("error::", error);
         if (error.name === "TokenExpiredError") {
-          global.$res.authError("token已过期");
+          global.$res.error("auth", "token已过期");
         } else {
-          global.$res.authError("token不合法");
+          global.$res.error("auth", "token不合法");
         }
       }
     };
