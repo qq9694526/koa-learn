@@ -10,22 +10,22 @@ class Auth {
       // 校验非空
       if (!token) {
         global.$res.error("auth", "token不能为空");
-        return;
       }
       try {
         const result = jwt.verify(token, privateKey) || {};
         ctx.auth = {
+          id: result.id,
           openid: result.openid,
         };
-        await next();
       } catch (error) {
-        console.log("error::", error);
+        console.log("error name::", error.name);
         if (error.name === "TokenExpiredError") {
           global.$res.error("auth", "token已过期");
         } else {
           global.$res.error("auth", "token不合法");
         }
       }
+      await next();
     };
   }
 }

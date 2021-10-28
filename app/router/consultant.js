@@ -1,10 +1,11 @@
 const Router = require("@koa/router");
 const router = new Router();
 const validate = require("validate.js");
+const Auth = require("../middleware/auth");
 
 const Consultant = require("../model/consultant");
 
-router.post("/consultant/add", async (ctx, next) => {
+router.post("/consultant/add", new Auth().m, async (ctx, next) => {
   const { name, avatar, phone, tag } = ctx.request.body;
   //参数校验
   const constraints = {
@@ -43,7 +44,7 @@ router.post("/consultant/add", async (ctx, next) => {
   }
 });
 
-router.post("/consultant/update", async (ctx, next) => {
+router.post("/consultant/update", new Auth().m, async (ctx, next) => {
   const { id, name, avatar, phone, tag } = ctx.request.body;
   //参数校验
   if (validate.isEmpty(id)) {
@@ -91,7 +92,7 @@ router.get("/consultant/list", async (ctx, next) => {
   }
 });
 
-router.post("/consultant/delete", async (ctx, next) => {
+router.post("/consultant/delete", new Auth().m, async (ctx, next) => {
   const { id } = ctx.request.body;
   if (validate.isEmpty(id)) {
     global.$res.error("params", "id不能为空");
